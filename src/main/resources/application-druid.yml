@@ -4,18 +4,18 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:mysql://192.168.10.8:3306/manager?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-                username: management
-                password: Management1234
+                url: jdbc:mysql://localhost:3306/ys_management?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+                username: root
+                password:
                 type: com.alibaba.druid.pool.DruidDataSource
                 driverClassName: com.mysql.cj.jdbc.Driver
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
                 enabled: true
-                url: jdbc:sqlserver://192.168.10.211:1433;databaseName=TD_CP_Data
-                username: cp
-                password: '@abc123'
+                url: jdbc:sqlserver://34.80.162.250:1433;databaseName=TD_CP_Data
+                username: cron
+                password: 'Cron**472&66327'
                 type: com.alibaba.druid.pool.DruidDataSource
                 driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
             # 初始连接数

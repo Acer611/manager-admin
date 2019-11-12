@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="columnComment"  column="column_comment"   />
 	</resultMap>
 
-	<!--<sql id="selectGenVo">
+	<sql id="selectGenVo">
         select table_name, table_comment, create_time, update_time from information_schema.tables
     </sql>
 
@@ -30,10 +30,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="tableComment != null and tableComment != ''">
 			AND table_comment like concat('%', #{tableComment}, '%')
 		</if>
-		<if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash; 开始时间检索 &ndash;&gt;
+		<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
 			and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 		</if>
-		<if test="params.endTime != null and params.endTime != ''">&lt;!&ndash; 结束时间检索 &ndash;&gt;
+		<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
 			and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 		</if>
 	</select>
@@ -47,15 +47,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
 		select column_name, data_type, column_comment, extra from information_schema.columns
         where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
-	</select>-->
+	</select>
 
-	<!--&lt;!&ndash;sqlserver&ndash;&gt;-->
-	<sql id="selectGenVo">
+	<!--sqlserver-->
+	<!--<sql id="selectGenVo">
 		select name AS table_name,crdate AS create_time from sysobjects where xtype='U'
-	</sql>
+	</sql>-->
 
-	<!--&lt;!&ndash;sqlserver&ndash;&gt;-->
-	<select id="selectTableList" parameterType="com.ruoyi.project.domain.tool.gen.TableInfo" resultMap="TableInfoResult">
+	<!--sqlserver-->
+	<!--<select id="selectTableList" parameterType="com.ruoyi.project.domain.tool.gen.TableInfo" resultMap="TableInfoResult">
 		<include refid="selectGenVo"/>
 
 		<if test="tableName != null and tableName != ''">
@@ -64,25 +64,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<if test="tableComment != null and tableComment != ''">
 			AND table_comment like concat('%', #{tableComment}, '%')
 		</if>
-		<if test="params.beginTime != null and params.beginTime != ''"><!--&lt;!&ndash; 开始时间检索 &ndash;&gt;-->
+		<if test="params.beginTime != null and params.beginTime != ''">&lt;!&ndash;&lt;!&ndash; 开始时间检索 &ndash;&gt;&ndash;&gt;
 			and date_format(create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
 		</if>
-		<if test="params.endTime != null and params.endTime != ''"><!--&lt;!&ndash; 结束时间检索 &ndash;&gt;-->
+		<if test="params.endTime != null and params.endTime != ''">&lt;!&ndash;&lt;!&ndash; 结束时间检索 &ndash;&gt;&ndash;&gt;
 			and date_format(create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
 		</if>
-	</select>
+	</select>-->
 
 
-	<!--&lt;!&ndash;sqlserver&ndash;&gt;-->
-	<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
+	<!--sqlserver-->
+	<!--<select id="selectTableByName" parameterType="String" resultMap="TableInfoResult">
 		<include refid="selectGenVo"/>
 		and name = #{tableName}
-	</select>
+	</select>-->
 
-	<!--&lt;!&ndash;sqlserver&ndash;&gt;-->
-	<select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
+	<!--sqlserver-->
+	<!--<select id="selectTableColumnsByName" parameterType="String" resultMap="ColumnInfoResult">
 		SELECT column_name,data_type FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME=#{tableName}
-	</select>
+	</select>-->
 
 
 </mapper>
